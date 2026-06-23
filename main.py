@@ -1,49 +1,44 @@
 import tkinter as tk
-import random
-from tkinter import messagebox
 
-screen = tk.Tk()
-screen.title("Guess The Number")
-screen.configure(bg="black")
-screen.geometry("800x600")
+screen=tk.Tk()
+screen.title("Multiplication table generator")
+screen.geometry("500x800")
+screen.configure(bg="grey")
 
-attempts = 0
-actualnumber = random.randint(1, 20)
+def generatetable():
+    number=int(e1.get())
+    range1=int(r.get())
+    for i in range(1,range1+1):
+        result=str(number)+"*"+str(i)+"="+str(number*i)
+        lb1.insert(tk.END,result)
 
-def checkresult():
-    global attempts, actualnumber
-    guessnumber = int(e1.get())
+l1=tk.Label(text="Multiplication table generator",width=25,height=2,bg="black",fg="white",font=("Arial",15))
+l1.place(x=100,y=50)
 
-    if guessnumber == actualnumber:
-        messagebox.showinfo("Result", "You win the challenge")
-        b1.config(state="disabled")
+l2=tk.Label(text="enter a number",width=15,height=1,bg="white",fg="black",font=("Arial",10))
+l2.place(x=30,y=150)
 
-    else:
-        attempts = attempts + 1
-        l3.config(text="Attempts: " + str(attempts))
+e1=tk.Entry(width=15,bg="white",fg="black")
+e1.place(x=250,y=150)
 
-        if attempts >= 3:
-            messagebox.showinfo("Result", "You lost the challenge")
-            b1.config(state="disabled")
-        else:
-            if guessnumber > actualnumber:
-                messagebox.showinfo("Result", "Guess Lower")
-            elif guessnumber < actualnumber:
-                messagebox.showinfo("Result", "Guess Higher")
+b1=tk.Button(text="Generate table",width=15,height=2,fg="black",bg="teal",command=generatetable)
+b1.place(x=100,y=350)
 
-l1 = tk.Label(text="Welcome to guess the number game", width=30, height=2, bg="skyblue", fg="white", font=("Comic Sans MS", 20))
-l1.place(x=200, y=50)
+l3=tk.Label(text="Select your range",width=20,height=2,bg="teal",fg="white",font=("Arial",10))
+l3.place(x=50,y=250)
 
-l2 = tk.Label(text="Take a guess from 1 to 20", width=25, height=1, bg="turquoise", fg="white", font=("Comic Sans MS", 13))
-l2.place(x=50, y=150)
+r=tk.IntVar()
+r1=tk.Radiobutton(text=10,value=10,variable=r)
+r1.place(x=250,y=250)
 
-e1 = tk.Entry(width=20, bg="teal", fg="white")
-e1.place(x=400, y=150)
+r2=tk.Radiobutton(text=20,value=20,variable=r)
+r2.place(x=300,y=250)
 
-b1 = tk.Button(text="Check", width=15, height=1, bg="grey", fg="white", command=checkresult)
-b1.place(x=200, y=250)
+r3=tk.Radiobutton(text=30,value=30,variable=r)
+r3.place(x=350,y=250)
 
-l3 = tk.Label(text="Attempts: 0", width=25, height=1, bg="green", fg="white", font="Arial")
-l3.place(x=200, y=350)
+lb1=tk.Listbox(width=30,height=10,bg="black",fg="white")
+lb1.place(x=100,y=450)
+
 
 screen.mainloop()
